@@ -1,0 +1,50 @@
+apiVersion: v1
+baseDomain: testhow.ml
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: 
+   aws:
+    zones:
+    - us-east-2a
+    - us-east-2b
+    - us-east-2c
+    rootVolume:
+      size: 100
+      type: gp2
+    type: m4.xlarge
+  replicas: 3
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: 
+   aws:
+    zones:
+    - us-east-2a
+    - us-east-2b
+    - us-east-2c
+    rootVolume:
+      size: 200
+      type: gp2
+    type: m4.xlarge
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: aws-ocp4
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  aws:
+    region: us-east-2
+publish: External
+pullSecret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfN2QyMGRmNDI2MjRlNDRkMzhjOTY0MDY4ZTdlYjJlNzQ6VlozMEdKSFNIMlZGWDBBMjhGVUxaVUNDMzRWRTBNNlk2WVRWSkdQS0FCSElXTEVETEw3WlFKMU1PV01TT040TA==","email":"dhanamjaya.rao.kalla@ibm.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfN2QyMGRmNDI2MjRlNDRkMzhjOTY0MDY4ZTdlYjJlNzQ6VlozMEdKSFNIMlZGWDBBMjhGVUxaVUNDMzRWRTBNNlk2WVRWSkdQS0FCSElXTEVETEw3WlFKMU1PV01TT040TA==","email":"dhanamjaya.rao.kalla@ibm.com"},"registry.connect.redhat.com":{"auth":"fHVoYy1wb29sLTg4NGQ0YmYzLWUyM2UtNDA1MS04OTI2LWJiNWU2ODdmNjQzMjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSXpPR0UzWXpsbU1qTmxOV1kwWTJVd1lqSTBOekF3T1RVM09UTTVNbU5tT1NKOS5ReDBQTjZjMGx5NFZmTUdJMnJFQmtIQlNHWkxsSmFEdWQ4aDFzdzVmVjVaSUdLVktDQVNZOG44cklLTnZxRHNnLVVIRnFWLVBGb0IwdEhFZGhoZ1VLaWlXVmxMd1FmUjRkdDBkanRyTWN0ZnVFcVNMVkg5bVplVktJN0RETmpKdkxJMm0xcUVIRF90TFUta2s5Z2wzeVozczNXSUVPd2JfUGV4alFiNXNFNUFzbk9PbTJHSVlid3pScXVHVDhvSzRrM1pJNUsxX2NxenpkSjhSRUVzdzgzZDBtall6RVk2Vld2ME9xRkpvOUFHS3k1ejNOZG9oMjF2WHVYeVJyUmhXOE5PNGJSSHB1Z2hrNEtLdVZFLUZraDdnUEpKUldEWDF5Z1oxbkVuckxrY19uVlZLdjVLYmhLdlpJdkhwa1ItZVVZZDVsR2tUY0ExOHNWeFJCa3BZVzdDVDFPeHV1bGpyOVdsMVFwM2NDSlctTnBCVnQ0RDZoSncxY1VYS2ZXcHZZdF9jX1VDcHk1MU9aNDZEbmRkMXl2MzBpd2VxNW5GRi15VUQ4dGlUS2Vtd2E1MW9QdVZHVmZoRFJYNmFIT1RtODFXZTJrRDJsNGstSGlDdXNIVW1EbExxOEVEUmhUakdQc2ZVQXQyNzItUlV5YkdiYTJjVHVSTWp4N1ZTVzhpaVR5dC1HcS13ckRxalV3YzEzNmJ2MENEV21wQnNqNXhXZUpaSWpxelllRXVPb1pjZWg5bUgzTHFJN0p6Ql9NY2FXX3dPQkR2X0NwUVZLaUhNTkRkaVpSSVFDUkREWmVQRDJ3MUtGS0ZKaFFNWVE1dEJKaWtQNUdwaHpyNXhuamd2ZzFaTzBpXzQyTDhzSjE2ZE91VmotcV9xdWY3d0JMYXpTLWU3eVdqTndqMA==","email":"dhanamjaya.rao.kalla@ibm.com"},"registry.redhat.io":{"auth":"fHVoYy1wb29sLTg4NGQ0YmYzLWUyM2UtNDA1MS04OTI2LWJiNWU2ODdmNjQzMjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSXpPR0UzWXpsbU1qTmxOV1kwWTJVd1lqSTBOekF3T1RVM09UTTVNbU5tT1NKOS5ReDBQTjZjMGx5NFZmTUdJMnJFQmtIQlNHWkxsSmFEdWQ4aDFzdzVmVjVaSUdLVktDQVNZOG44cklLTnZxRHNnLVVIRnFWLVBGb0IwdEhFZGhoZ1VLaWlXVmxMd1FmUjRkdDBkanRyTWN0ZnVFcVNMVkg5bVplVktJN0RETmpKdkxJMm0xcUVIRF90TFUta2s5Z2wzeVozczNXSUVPd2JfUGV4alFiNXNFNUFzbk9PbTJHSVlid3pScXVHVDhvSzRrM1pJNUsxX2NxenpkSjhSRUVzdzgzZDBtall6RVk2Vld2ME9xRkpvOUFHS3k1ejNOZG9oMjF2WHVYeVJyUmhXOE5PNGJSSHB1Z2hrNEtLdVZFLUZraDdnUEpKUldEWDF5Z1oxbkVuckxrY19uVlZLdjVLYmhLdlpJdkhwa1ItZVVZZDVsR2tUY0ExOHNWeFJCa3BZVzdDVDFPeHV1bGpyOVdsMVFwM2NDSlctTnBCVnQ0RDZoSncxY1VYS2ZXcHZZdF9jX1VDcHk1MU9aNDZEbmRkMXl2MzBpd2VxNW5GRi15VUQ4dGlUS2Vtd2E1MW9QdVZHVmZoRFJYNmFIT1RtODFXZTJrRDJsNGstSGlDdXNIVW1EbExxOEVEUmhUakdQc2ZVQXQyNzItUlV5YkdiYTJjVHVSTWp4N1ZTVzhpaVR5dC1HcS13ckRxalV3YzEzNmJ2MENEV21wQnNqNXhXZUpaSWpxelllRXVPb1pjZWg5bUgzTHFJN0p6Ql9NY2FXX3dPQkR2X0NwUVZLaUhNTkRkaVpSSVFDUkREWmVQRDJ3MUtGS0ZKaFFNWVE1dEJKaWtQNUdwaHpyNXhuamd2ZzFaTzBpXzQyTDhzSjE2ZE91VmotcV9xdWY3d0JMYXpTLWU3eVdqTndqMA==","email":"dhanamjaya.rao.kalla@ibm.com"}}}'
+sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDIGYJNRwB43gNT1H/jqVBMTaslkNEXlyn+YgDwievARIXxu1V/wLD0T1buREXWbfPR8Vu1WBHt2HpVgLgLqZXDIktRz9nJL68qfUlWAf9Z30yJic34pZq+WjztMT0Ry7fjbVb+HMlX1iMDhwZ98ME91EenKnL4IiTjamtl0aC2it4SWZ5dlBxe6SybcMVcTYc7s8VcbsshO8Pot1epzusLymISbF8IO/srSvd6AiW3CYKpjR0BLg2Cl12lk9dDHgSZbRcW9DAjr1hb0GmERMnO9WGU+Ykoa5WBhMHnOxTJiu2/hS3LZNwSNMLpXu2JUBNPOCj6r2ggTUhmXoWVOJ2wLiSUP9MQN98vmkFan9/spenFG8ouRKH/k4muDc/U5NDMC4obxUc1xX/qtvva5/p82mt9Mzi1V/bnb35yEJjvfBqLWTFWEAWrzaIqW3FUGZN4gagA9+w7tkwCjthGTFSJsxpi5mmTuHO4fs6yovN/kkU2STUBV/GszAy3EDfYsVanjGfbd6PURTtwuXFu5iCnycoJov/X1pL7JVT4fRTUtQUh6EjBHydmppoteuuk+cTHbcX0n2fyOnUu7FXNbJkJ/ufubRYel1LV/2ijaQmU0H4ZmR9XmRh0jcA/7097xrv+2ORetsiA2S6hQ0aHXzgC3xSNAGjGbsC7dobZQyQCDQ==
